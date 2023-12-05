@@ -40,7 +40,7 @@ streamlit.text("The fruitload list contains")
 streamlit.dataframe(my_data_row)
 
 try:
-  add_fruit = streamlit.text_input('What fruit would you like information about?','JackFruit')
+  add_fruit = streamlit.text_input('What fruit would you like information about?')
   if not add_fruit:
     stramlit.error('Please select a fruit to get information')
   else:
