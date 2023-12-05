@@ -5,7 +5,7 @@ import requests
 from urllib.error import URLError
 
 def get_fruityvice_data(fruit_choice):
-  fruityvice_response = requests.get("https://fruityvice.com/api/fruit/" + add_fruit)
+  fruityvice_response = requests.get("https://fruityvice.com/api/fruit/" + fruit_choice)
   return pandas.json_normalize(fruityvice_response.json())
 
 streamlit.title("My Parents New Healthy Dinner")
