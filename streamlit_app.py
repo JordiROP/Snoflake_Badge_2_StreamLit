@@ -50,7 +50,7 @@ if streamlit.button('Get Fruit Load List'):
 
 try:
   add_fruit = streamlit.text_input('What fruit would you like information about?')
-  if streamlit.button('Get Fruit Load List'):
+  if streamlit.button('Add Fruit to List'):
     if not add_fruit:
       streamlit.error('Please select a fruit to get information')
     else:
