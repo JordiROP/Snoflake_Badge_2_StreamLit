@@ -2,7 +2,7 @@ import streamlit
 import pandas
 import snowflake.connector
 import requests
-
+from urllib.error import URLError
 streamlit.title("My Parents New Healthy Dinner")
 
 streamlit.header("Breakfast Favorites")
@@ -39,6 +39,15 @@ my_data_row = my_cur.fetchall()
 streamlit.text("The fruitload list contains")
 streamlit.dataframe(my_data_row)
 
-add_fruit = streamlit.text_input('What fruit would you like information about?','JackFruit')
-streamlit.write('The user added ', add_fruit)
-my_data_row.append(add_fruit)
+try:
+  add_fruit = streamlit.text_input('What fruit would you like information about?','JackFruit')
+  if not add_fruit:
+    stramlit.error('Please select a fruit to get information')
+  else:
+    fruityvice_response = requests.get("https://fruityvice.com/api/fruit/" + add_fruit)
+    fruityvice_normalized = pandas.json_normalize(fruityvice_response.json())
+    streamlit.dataframe(fruityvice_normalized)
+except URLError as e:
+  streamlit.error()
+  #streamlit.write('The user added ', add_fruit)
+  #my_cur.execute("insert into PC_RIVERY_DB.PUBLIC.FRUIT_LOAD_LIST values (" + add_fruit + ")")
