@@ -49,6 +49,7 @@ if streamlit.button('Get Fruit Load List'):
   streamlit.text("The fruitload list contains")
   my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])
   streamlit.dataframe(get_fruit_load_list())
+  my_cnx.close()
 
 try:
   add_fruit = streamlit.text_input('What fruit would you like information about?')
@@ -58,6 +59,7 @@ try:
     else:
       my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])
       streamlit.text(insert_row_snowflake(add_fruit))
+      my_cnx.close()
 except URLError as e:
   streamlit.error()
   #streamlit.write('The user added ', add_fruit)
